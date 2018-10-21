@@ -1,6 +1,6 @@
 # tuboshu-frontend-desktop
 
-> An electron-vue project
+> An electron-vue project dev 
 
 #### Build Setup
 
