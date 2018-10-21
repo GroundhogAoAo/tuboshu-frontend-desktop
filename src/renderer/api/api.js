@@ -44,7 +44,7 @@ const logout = (data) => axios({ method: 'put', url: '/logout', data: data })
 // 注册 ⭐️
 const register = (data) => axios({ method: 'post', url: '/register', data: data })
 
-const test  = (data) => axios({ method: 'get', url: '/account-info', params: data })
+const test  = (data) => axios({ method: 'get', url: 'https://www.easy-mock.com/mock/5b8ca430d6202f6d8a3d99d0/test/v1/mykline', params: data })
 
 // 账户信息 ⭐️
 const acountInfo = (data) => axios({ method: 'get', url: '/account-info', params: data })
