@@ -165,10 +165,6 @@ if (process.env.NODE_ENV === 'production') {
         from: path.join(__dirname, '../static'),
         to: path.join(__dirname, '../dist/electron/static'),
         ignore: ['.*']
-      },{
-        from: path.join(__dirname, '../node_modules/iview/dist/styles/iview.css'),
-        to: path.join(__dirname, '../dist/electron/static'),
-        ignore: ['.*']
       }
     ]),
     new webpack.DefinePlugin({
