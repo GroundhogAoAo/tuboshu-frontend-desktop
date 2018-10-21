@@ -51,7 +51,7 @@ import {test} from '@/api/api';
     name: 'landing-page',
       data () {
             return {
-                ss:'s'
+                ss:'1'
             }
         },
       computed: {
@@ -68,8 +68,9 @@ import {test} from '@/api/api';
            try {
                const res = await test()
                console.log(res);
+               this.ss = res.data.msg
            } catch (error) {
-               this.ss = error.status || 'ss'
+               this.ss = 'ss'
            }
       }
     }
