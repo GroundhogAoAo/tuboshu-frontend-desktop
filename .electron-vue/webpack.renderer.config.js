@@ -166,7 +166,7 @@ if (process.env.NODE_ENV === 'production') {
         to: path.join(__dirname, '../dist/electron/static'),
         ignore: ['.*']
       },{
-        from: path.join(__dirname, '../node_modules/iview'),
+        from: path.join(__dirname, '../node_modules/iview/dist/styles/iview.css'),
         to: path.join(__dirname, '../dist/electron/static'),
         ignore: ['.*']
       }
