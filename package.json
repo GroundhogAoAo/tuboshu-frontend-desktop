@@ -1,6 +1,6 @@
 {
   "name": "tuboshu-frontend-desktop",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "author": "wukai",
   "description": "An electron-vue project",
   "license": null,
@@ -19,9 +19,9 @@
     "test": "npm run unit && npm run e2e",
     "unit": "karma start test/unit/karma.conf.js",
     "postinstall": "",
-    "patch": "npm version patch && git push origin master && git push origin --tags", 
-    "minor": "npm version minor && git push origin master && git push origin --tags", 
-    "major": "npm version major && git push origin master && git push origin --tags"  
+    "patch": "npm version patch && git push origin master && git push origin --tags",
+    "minor": "npm version minor && git push origin master && git push origin --tags",
+    "major": "npm version major && git push origin master && git push origin --tags"
   },
   "build": {
     "productName": "tuboshu-frontend-desktop",
