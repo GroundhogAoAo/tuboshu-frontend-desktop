@@ -8,11 +8,19 @@ export default new Router({
     {
       path: '/',
       name: 'landing-page',
-      component: require('@/components/LandingPage').default
+      component: require('@/components/LandingPage').default,
+      children: [{
+        path: '/option',
+        component: require('@/components/Optional/Option').default,
+      },{
+        path: '/quotes',
+        component: require('@/components/Quotes/quotes').default,
+      }]
     },
     {
       path: '*',
-      redirect: '/'
+      redirect: '/',
+      component: require('@/components/LandingPage/SystemInformation').default
     }
   ]
 })
