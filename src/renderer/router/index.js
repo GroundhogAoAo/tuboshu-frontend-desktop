@@ -16,6 +16,10 @@ export default new Router({
         path: '/quotes',
         component: require('@/components/Quotes/quotes').default,
       }]
+    },{
+      path: '/login',
+      name: 'Login',
+      component: require('@/components/Login/login').default,
     },
     {
       path: '*',

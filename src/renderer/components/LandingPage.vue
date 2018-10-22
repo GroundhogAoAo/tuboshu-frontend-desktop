@@ -24,7 +24,7 @@
                     <Icon type="ios-card-outline" size="16" />
                     <span>账户</span>
                 </MenuItem>
-                  <MenuItem name="1-6">
+                  <MenuItem name="1-6" to="/login">
                     <Icon type="ios-apps-outline"  size="16"/>
                     <span>{{ss}}</span>
                 </MenuItem>
