@@ -53,6 +53,10 @@ export default {
 
   },
   methods: {
+    actionLogin(){
+      console.log('object')
+      this.$router.push({name:'landing-page'})
+    }
   }
 }
 </script>
@@ -61,7 +65,7 @@ export default {
   .login{
       background: #fff;
       position: relative;
-      height: 890px;
+      height: 500px;
       // border:10px solid red;
     .login-form{
       .title{
@@ -73,15 +77,15 @@ export default {
         color:rgba(67,66,93,1);
         opacity:1;
         text-align: center;
-        margin-top:68px;
-        margin-bottom: 200px;
+        margin-top:28px;
+        margin-bottom: 50px;
       }
       .formStyle{
         width: 400px;
         margin: 0 auto;
       }
       width:550px;
-      height:756px;
+      height:456px;
       background:rgba(255,255,255,1);
       box-shadow:rgba(47,94,175,0.4) 0px 0px 10px;
       opacity:0.8;

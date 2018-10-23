@@ -46,7 +46,7 @@
 </template>
 
 <script>
-import {test} from '@/api/api';
+import {test ,testPing,getExchangeInfo ,getSymbolPrice} from '@/api/api';
   export default {
     name: 'landing-page',
       data () {
@@ -66,8 +66,8 @@ import {test} from '@/api/api';
       },
        async test(){
            try {
-               const res = await test()
-               console.log(res);
+               const res = await getSymbolPrice({symbol:'LTCBTC'})
+               console.log(res,'aaa');
                this.ss = res.data.msg
            } catch (error) {
                this.ss = 'ss'

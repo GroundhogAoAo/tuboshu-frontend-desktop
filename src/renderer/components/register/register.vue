@@ -1,132 +1,29 @@
 <template>
  <div class="register"  >
   <div class="register-form">
-       <div  class="title" >
-         <span> 欢迎注册</span>
-        </div>
-       <Form   class="formStyle" align="center" >
-        <FormItem   align="left">
-            <Select  v-model="countryCode" style="width:100%">
-       <Option v-for="(item ,index) in countryList " :key = "index" :value="item.c">{{item.c}}</Option>
-     </Select>
-        </FormItem>
-         <FormItem  prop="email" align="center">
-            <Input   placeholder="邮箱"  v-model="regEmailData.email"></Input>
-        </FormItem>
-         <FormItem  prop="password" align="center">
-            <Row>
-             <Col span="18"><Input  placeholder="验证码" v-model="regEmailData.verificationCode"></Input></Col>
-             <Col span="6"><Button class="get-code" @click="getVerCode()" v-timecount>获取验证码</Button></Col>
-            </Row>
-        </FormItem>
-        <FormItem  prop="password" align="center">
-            <Input  placeholder="密码" type="password" v-model="regEmailData.password"></Input>
-        </FormItem>
-          <FormItem  align="center"  >
-            <Input  placeholder="确认密码" type="password" v-model="regEmailData.passwordAgain"></Input>
-        </FormItem>
-         <FormItem  align="center"  >
-            <Input  placeholder="邀请码(选填)" v-model="regEmailData.promotionCode"></Input>
-        </FormItem>
-         <FormItem align="left">
-          <Checkbox label="Eat">我已阅读并同意</Checkbox>
-           <a>服务协议</a>
-        </FormItem>
-        <FormItem align="center">
-            <Button type="primary" long   @click="handleSubmit">注册</Button>
-        </FormItem>
 
-    </Form>
   </div>
 </div>
 </div>
 </template>
 
 <script>
-import {register, axios} from 'Api/api'
-import countryList from 'Assets/js/countryList'
-import {sendVerCode, initGtion} from 'Utils/verCode'
 export default {
   name: 'register',
   data () {
     return {
-      gtResult: {},
-      countryCode: '中国大陆',
-      countryList: countryList,
-      regEmailData: {
-        email: '',
-        password: '',
-        verificationCode: '',
-        promotionCode: '',
-        passwordAgain: ''
-      }
-    }
-  },
-  computed: {
-    currentGtState: function () {
-      return this.$store.getters.getCurrentGtResult
-    }
-  },
-  watch: {
-    currentGtState: function (val) {
-      if (val) {
-        this.gtResult = val
-        this.$store.dispatch('changeGtCheck', false)
-        sendVerCode(this, { uri: `mail:${this.regEmailData.email}`,
-          useAge: 'register'})
-      }
     }
   },
   methods: {
-    getVerCode () { // 缺少验证
-      initGtion(this)
-    },
-    async handleSubmit () {
-      try {
-        let registerData = {
-          challenge: this.gtResult.geetest_challenge,
-          country: this.countryCode,
-          email: this.regEmailData.email,
-          password: this.regEmailData.password,
-          promotionCode: this.regEmailData.promotionCode,
-          seccode: this.gtResult.geetest_seccode,
-          validate: this.gtResult.geetest_validate,
-          verificationCode: this.regEmailData.verificationCode
-        }
-        const res = await register(registerData)
-        if (res.status === 200) {
-          const {data} = res
-          localStorage.setItem('token', data.token)
-          axios.defaults.headers = { // 修复请求时候还是带着之前的那个token
-            'Authentication-Token': data.token,
-            'Content-Type': 'application/json'
-          }
-          await this.$store.dispatch('assignUserInfo')
-          this.$router.push('/auth/identity')
-          this.$Notice.success({
-            title: '注册成功',
-            desc: '跳转～'
-          })
-        }
-      } catch (error) {
-        console.log(error)
-        if (error) {
-          this.$Notice.error({
-            title: '注册失败',
-            desc: error.data.message
-          })
-        }
-      }
-    }
-  }
+}
 }
 </script>
 
-<style lang="less" scoped >
+<style lang="scss" scoped >
   .register{
       background: #fff;
       position: relative;
-      height: 890px;
+      height: 500px;
     .register-form{
       .title{
         height:48px;

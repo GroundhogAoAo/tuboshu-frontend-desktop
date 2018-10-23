@@ -2,7 +2,7 @@
   <div class="option">
       <Tabs value="name1">
         <TabPane label="自选" name="name1">
-              <Table width="800" border :columns="columns2" :data="data3"></Table>
+              <Table width="800" border :columns="columns2" :data="data"></Table>
         </TabPane>
         <TabPane label="短线" name="name2">
             短线
@@ -13,20 +13,23 @@
 </template>
 
 <script>
+import {getExchangeInfo} from '@/api/api';
+import { timingSafeEqual } from 'crypto';
+
 export default {
   name:'Option',
     data () {
             return {
                 columns2: [
                     {
-                        title: 'Name',
-                        key: 'name',
+                        title: '币对',
+                        key: 'symbol',
                         width: 100,
                         fixed: 'left'
                     },
                     {
-                        title: 'Age',
-                        key: 'age',
+                        title: '状态',
+                        key: 'status',
                         width: 100
                     },
                     {
@@ -48,41 +51,25 @@ export default {
                         title: 'Postcode',
                         key: 'zip',
                         width: 100
-                    },
-                    {
-                        title: 'Action',
-                        key: 'action',
-                        fixed: 'right',
-                        width: 120,
-                        render: (h, params) => {
-                            return h('div', [
-                                h('Button', {
-                                    props: {
-                                        type: 'text',
-                                        size: 'small'
-                                    }
-                                }, 'View'),
-                                h('Button', {
-                                    props: {
-                                        type: 'text',
-                                        size: 'small'
-                                    }
-                                }, 'Edit')
-                            ]);
-                        }
                     }
                 ],
-                data3: [
-                    {
-                        name: 'John Brown',
-                        age: 18,
-                        address: 'New York No. 1 Lake Park',
-                        province: 'America',
-                        city: 'New York',
-                        zip: 100000
-                    },
-
+                data: [
                 ]
+            }
+        },
+        created(){
+            this.initData()
+        },
+        methods:{
+            async initData(){
+                try {
+                    const res = await getExchangeInfo()
+                    if(res.status === 200){
+                        this.data = res.data.symbols
+                    } 
+                } catch (error) {
+                    
+                }
             }
         }
     }

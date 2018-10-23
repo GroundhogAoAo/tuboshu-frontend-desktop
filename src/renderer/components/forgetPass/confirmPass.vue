@@ -46,7 +46,7 @@ export default {
 }
 </script>
 
-<style lang="less" scoped>
+<style lang="scss" scoped>
   .confirm-pass{
     height: 890px;
     border:1px solid #fff; // why

@@ -14,11 +14,9 @@ export default {
   },
   methods:{
     open:function(){
-      // this.$electron.remote.dialog.showMessageBox({
-      //   title:'wukai',
-      //   message:'WWWWW',
-      //   detail:`Version `
-      // })
+      this.$electron.remote.dialog.showOpenDialog({
+    
+      })
       // this.$electron.remote.shell.beep()
     }
   }

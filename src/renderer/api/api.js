@@ -4,11 +4,11 @@ const axios = require('axios')
 // const host = env === 'prod' ? 'https://www.easy-mock.com/mock/5b5005e53720ca0b98ba8265/prod' : 'https://www.easy-mock.com/mock/5b8ca430d6202f6d8a3d99d0/test/v1'
 // axios.defaults.baseURL = '/v1'
 
-axios.defaults.baseURL = ''
+axios.defaults.baseURL = 'https://api.binance.com'
 axios.defaults.timeout = 100000 // 超时时间
 axios.defaults.withCredentials = true // 允许跨域携带cookie
 axios.defaults.headers = {
-  'Authentication-Token': localStorage.token,
+  // 'Authentication-Token': localStorage.token,
   'Content-Type': 'application/json'
 }
 
@@ -49,8 +49,21 @@ const test  = (data) => axios({ method: 'get', url: 'https://www.easy-mock.com/m
 // 账户信息 ⭐️
 const acountInfo = (data) => axios({ method: 'get', url: '/account-info', params: data })
 
+// biance
+const testPing = (data) => axios({method:'get' , url:'/api/v1/ping' ,params:data})
+
+//
+const getExchangeInfo = (data) => axios({method:'get' , url:'/api/v1/exchangeInfo' ,params:data})
+
+//
+const getSymbolPrice = (data) => axios({method:'get' , url:'/api/v3/ticker/price' ,params:data})
+
+
 
 
 export {
-  axios,test
+  axios,test,
+  testPing,
+  getExchangeInfo,
+  getSymbolPrice
 }
