@@ -7,6 +7,8 @@
 
 <script>
 import {moduleName} from '@/api/api';
+const {ipcRenderer} = require('electron')
+
 export default {
   name:'Quotes',
   data(){
@@ -14,10 +16,11 @@ export default {
   },
   methods:{
     open:function(){
-      this.$electron.remote.dialog.showOpenDialog({
+      // this.$electron.remote.dialog.showOpenDialog({
     
-      })
+      // })
       // this.$electron.remote.shell.beep()
+      ipcRenderer.send('login-success','glasss')
     }
   }
 
