@@ -1,8 +1,14 @@
 <template>
 <div class="login"  >
   <div class="login-form">
+      <Row type="flex" justify="center" align="middle">
+        <Col><Icon type="md-analytics"  color="#ebac0e" size="39"/></Col>
+        <Col>
+         <span style="color:#ebac0e; font-size:24px;line-height:30px;">土拨鼠</span>
+        </Col>       
+      </Row>
        <div  class="title" >
-         <span> 欢迎登陆</span>
+         <span>登陆</span>
         </div>
        <Form ref="formCustom" :model="formCustom" :rules="ruleValidate"  class="formStyle" align="center" >
         <FormItem  prop="email" >
@@ -11,11 +17,16 @@
         <FormItem  prop="password" align="center">
             <Input type="password"  v-model="formCustom.password"  placeholder="密码"></Input>
         </FormItem>
-          <FormItem   >
-            <router-link class="fr" to="forgetpass" > 忘记密码?</router-link >
-        </FormItem>
+       
         <FormItem align="center">
-            <Button type="primary" long  @click="actionLogin">登录</Button>
+            <Button long  class="btn-style" @click="actionLogin" >登录</Button> 
+            <Button long  class="btn-style-two" @click="actionLogin" style="margin-top:10px;">访客浏览</Button>
+        </FormItem>
+        <FormItem>
+        <Row style="color:#6d6d72;">
+        <Col span="12" align="left"> <a style="color:#6d6d72;" >忘记密码</a></Col>
+        <Col  span="12" align="right"><a style="color:#6d6d72;" >注册</a></Col>
+        </Row>
         </FormItem>
     </Form>
   </div>
@@ -24,6 +35,7 @@
 </template>
 
 <script>
+import {getCountry} from '@/api/api';
 
 export default {
   name: 'Login',
@@ -49,65 +61,60 @@ export default {
   },
   watch: {
   },
-  created () {
+ async  created () {
 
   },
   methods: {
-    actionLogin(){
-      console.log('object')
-      this.$router.push({name:'landing-page'})
+   async actionLogin(){
+//      this.$electron.ipcRenderer.send('login-success','glasss')
+      try {
+        const res = await getCountry()
+        if(res.status === 200){
+          console.log(res);
+        }
+      } catch (error) {
+          console.log(res);
+      }
     }
   }
 }
 </script>
 
 <style lang="scss" scoped >
-  .login{
-      background: #fff;
-      position: relative;
-      height: 500px;
-      // border:10px solid red;
-    .login-form{
-      .title{
-        height:48px;
-        font-size:36px;
-        font-family:Segoe UI;
-        font-weight:400;
-        line-height:21px;
-        color:rgba(67,66,93,1);
-        opacity:1;
-        text-align: center;
-        margin-top:28px;
-        margin-bottom: 50px;
-      }
-      .formStyle{
-        width: 400px;
-        margin: 0 auto;
-      }
-      width:550px;
-      height:456px;
-      background:rgba(255,255,255,1);
-      box-shadow:rgba(47,94,175,0.4) 0px 0px 10px;
-      opacity:0.8;
-      border-radius:10px;
-      position: absolute;
-      left: 0;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      margin: auto;
-      padding: 20px;
-    }
+.login{
+  padding: 40px;
+  background: #0d0f16;
+  height: 450px;
+  .login-form{
+    text-align: center;
+    background: #0d0f16;
   }
+  .title{
+    margin-top:20px;
+    font-size: 14px;
+    padding-bottom: 20px;
+    color:#fff;
+  }
+   .btn-style{
+    background-color: #ebac0e;
+    border-color: #ebac0e;
+    color:black;
+    height: 40px;
+}
+ .btn-style-two{
+    background-color: #20273f;
+    border-color: #20273f;
+    color:#9fa1a8;
+    height: 40px;
+}
+}
+
 </style>
 <style>
 .login .ivu-input{
-  border-radius: 0px;
-  border-top: none;
-  border-left: none;
-  border-right: none;
+  background-color:#0d0f16;
+  height: 40px;
+
 }
-.login .ivu-input:focus{
-  box-shadow: none;
-}
+
 </style>

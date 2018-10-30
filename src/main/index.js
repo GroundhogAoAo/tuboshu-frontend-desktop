@@ -1,4 +1,4 @@
-import { app, BrowserWindow } from 'electron'
+import { app, BrowserWindow,ipcMain } from 'electron'
 
 /**
  * Set `__static` path to static files in production
@@ -13,6 +13,14 @@ const winURL = process.env.NODE_ENV === 'development'
   ? `http://localhost:9080`
   : `file://${__dirname}/index.html`
 
+
+
+let loginWindow
+const loginURL = process.env.NODE_ENV === 'development'
+  ? `http://localhost:9080/#/login`
+  : `file://${__dirname}/index.html`
+
+  
 function createWindow () {
   /**
    * Initial window options
@@ -31,8 +39,30 @@ function createWindow () {
   })
 }
 
+function createLoginWindow () {
+  /**
+   * Initial window options
+   */
+  loginWindow = new BrowserWindow({
+    height: 450,
+    useContentSize: true,
+    width: 350,
+    webPreferences: {webSecurity: false},
+  })
 
-app.on('ready', createWindow)
+  loginWindow.loadURL(loginURL)
+
+  loginWindow.on('closed', () => {
+    loginWindow = null
+    // app.quit()
+  })
+}
+
+ipcMain.on('login-success',(arg)=>{
+  loginWindow.close()
+  createWindow()
+})
+app.on('ready', createLoginWindow)
 
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
@@ -41,9 +71,9 @@ app.on('window-all-closed', () => {
 })
 
 app.on('activate', () => {
-  if (mainWindow === null) {
-    createWindow()
-  }
+  // if (mainWindow === null) {
+  //   createWindow()
+  // }
 })
 
 /**
